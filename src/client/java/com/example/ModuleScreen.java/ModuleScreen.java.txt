@@ -1,0 +1,70 @@
+package com.clientcreator4mc.carbonclient.gui;
+
+import com.clientcreator4mc.carbonclient.CarbonClient;
+import com.clientcreator4mc.carbonclient.module.Module;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.Text;
+import org.lwjgl.glfw.GLFW;
+import java.util.List;
+
+public class ModuleScreen extends Screen {
+    private final List<Module> modules;
+    private static final int PADDING = 10;
+    private static final int ENTRY_HEIGHT = 20;
+    private static final int ENTRY_WIDTH = 100;
+
+    public ModuleScreen() {
+        super(Text.of("Modules"));
+        this.modules = CarbonClient.getInstance().getModuleManager().getModules();
+    }
+
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        // dim background
+        renderBackground(matrices);
+
+        int x = PADDING, y = PADDING;
+        for (Module mod : modules) {
+            int color = mod.isToggled() ? 0xFF00FF00 : 0xFFFFFFFF;
+            // entry background
+            fill(matrices, x - 2, y - 2, x + ENTRY_WIDTH, y + ENTRY_HEIGHT - 2, 0x80000000);
+            // hover highlight
+            if (mouseX >= x && mouseX <= x + ENTRY_WIDTH &&
+                mouseY >= y && mouseY <= y + ENTRY_HEIGHT - 2) {
+                fill(matrices, x - 2, y - 2, x + ENTRY_WIDTH, y + ENTRY_HEIGHT - 2, 0x80FFFFFF);
+            }
+            // module name
+            textRenderer.draw(matrices, mod.getName(), x, y, color);
+            y += ENTRY_HEIGHT;
+        }
+
+        super.render(matrices, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        int x = PADDING, y = PADDING;
+        for (Module mod : modules) {
+            if (mouseX >= x && mouseX <= x + ENTRY_WIDTH &&
+                mouseY >= y && mouseY <= y + ENTRY_HEIGHT - 2) {
+                mod.toggle();
+                return true;
+            }
+            y += ENTRY_HEIGHT;
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        // close on ESC or R-Shift
+        if (keyCode == GLFW.GLFW_KEY_ESCAPE ||
+            keyCode == GLFW.GLFW_KEY_RIGHT_SHIFT) {
+            client.setScreen(null);
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+}
