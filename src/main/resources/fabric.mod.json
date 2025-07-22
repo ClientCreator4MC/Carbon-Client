@@ -17,10 +17,13 @@
   "entrypoints": {
     "main": [
       "com.example.ExampleMod"
+    ],
+    "client": [
+      "com.example.ExampleModClient"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json"
+    "modid.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.0",
