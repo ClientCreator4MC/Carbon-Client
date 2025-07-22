@@ -1,25 +1,23 @@
 {
   "schemaVersion": 1,
-  "id": "yourmod",
+  "id": "carbonclient",
   "version": "${version}",
-
-  "name": "Your Mod with Oyvey",
-  "description": "Merged Oyvey client features + your custom logic, updated to 1.21.7",
-  "authors": ["YourName"],
+  "name": "Carbon-Client",
+  "description": "A modular Fabric hack client for Minecraft 1.21.7",
+  "authors": ["ClientCreator4MC"],
+  "contact": {
+    "homepage": "https://github.com/ClientCreator4MC/Carbon-Client",
+    "sources": "https://github.com/ClientCreator4MC/Carbon-Client"
+  },
   "license": "MIT",
-
-  "icon": "assets/yourmod/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": ["com.yourmod.YourMod"],
-    "client": ["com.yourmod.client.YourModClient"]
+    "main": ["com.clientcreator4mc.carbonclient.CarbonClient"]
   },
-
+  "mixins": ["carbonclient.mixins.json"],
   "depends": {
-    "fabricloader": ">=0.20.0",
+    "fabricloader": ">=0.14.19",
     "fabric": "*",
     "minecraft": "1.21.7"
-  },
-  "mixins": ["yourmod.mixins.json"],
-  "clientMixins": ["yourmod.client.mixins.json"]
+  }
 }
