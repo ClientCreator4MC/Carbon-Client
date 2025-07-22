@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+chmod +x integrate_oyvey.sh
 
 #########################
 # 1. Project Configuration
