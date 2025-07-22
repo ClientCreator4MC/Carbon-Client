@@ -1,37 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "yourmod",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "An example Minecraft Fabric mod for 1.21",
-  "authors": [
-    "YourName"
-  ],
-  "contact": {
-    "homepage": "https://github.com/yourusername/examplemod",
-    "sources": "https://github.com/yourusername/examplemod"
-  },
+
+  "name": "Your Mod with Oyvey",
+  "description": "Merged Oyvey client features + your custom logic, updated to 1.21.7",
+  "authors": ["YourName"],
   "license": "MIT",
-  "icon": "assets/examplemod/icon.png",
-  "environment": "client",
+
+  "icon": "assets/yourmod/icon.png",
+  "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.example.ExampleMod"
-    ],
-    "client": [
-      "com.example.ExampleModClient"
-    ]
+    "main": ["com.yourmod.YourMod"],
+    "client": ["com.yourmod.client.YourModClient"]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
+
   "depends": {
-    "fabricloader": ">=0.15.0",
-    "minecraft": "~1.21.0",
-    "java": ">=21",
-    "fabric-api": "*"
+    "fabricloader": ">=0.20.0",
+    "fabric": "*",
+    "minecraft": "1.21.7"
   },
-  "suggests": {
-    "another-mod": "*"
-  }
+  "mixins": ["yourmod.mixins.json"],
+  "clientMixins": ["yourmod.client.mixins.json"]
 }
